@@ -1,0 +1,4 @@
+{"error":{"code":-32600,"data":{"reason":"configLoad","filePath":"/private/var/folders/b7/qzhtg3355qx45cwnnrcb42880000gn/T/mart-invalid-config-11nhnbgi/config.toml","line":1,"column":1,"detail":"/private/var/folders/b7/qzhtg3355qx45cwnnrcb42880000gn/T/mart-invalid-config-11nhnbgi/config.toml:1:1: unknown configuration field `unsupported_harness_phase`"},"message":"failed to load configuration: /private/var/folders/b7/qzhtg3355qx45cwnnrcb42880000gn/T/mart-invalid-config-11nhnbgi/config.toml:1:1: unknown configuration field `unsupported_harness_phase`"}}
+Error: startup configuration unavailable
+
+exit=1

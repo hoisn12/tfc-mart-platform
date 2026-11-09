@@ -1,0 +1,8 @@
+명령: /bin/zsh -lc 'source ~/.nvm/nvm.sh && nvm use 25 >/dev/null && npm test'
+종료: 1
+Vitest4.1.12: 11 passed / 1 failed (12), 259ms.
+FAIL src/services/localRepository.test.ts > 등록·수정·새 repository 복원 시 선행0와 금액·감사를 유지한다
+ServiceError: 할인가는 판매가 이하여야 합니다.
+ at Object.saveProduct src/services/localRepository.ts:27:145
+ at src/services/localRepository.test.ts:11:183
+E2E: NOT_RUN(단위 테스트 실패로 && 뒤 명령 미실행).

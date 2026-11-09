@@ -1,0 +1,286 @@
+openapi: 3.0.3
+info:
+  title: 마트 UI 프로토타입 미래 API 연결점
+  version: 1.0.0
+  description: >-
+    현재 구현은 frontend local adapter이며 이 HTTP 서버를 기동하거나 호출하지 않는다.
+    향후 REST adapter 교체용 경계 초안이다. 실제 인증/서버 인가/Outbox/업로드/운영 계약 승인이 아니다.
+    동작과 오류 의미의 기준은 ui-prototype.behavior.md다.
+servers:
+  - url: /api/admin
+    description: 미래 연결점; 현재 사용 안 함
+paths:
+  /products:
+    get:
+      operationId: listProducts
+      summary: 상품 목록 연결점
+      parameters:
+        - { name: q, in: query, schema: { type: string } }
+        - { name: martId, in: query, schema: { type: string } }
+        - { name: category, in: query, schema: { type: string } }
+        - { name: saleStatus, in: query, schema: { type: string, enum: [ON_SALE, STOPPED] } }
+        - { name: visible, in: query, schema: { type: boolean } }
+        - { name: stockStatus, in: query, schema: { type: string, enum: [IN_STOCK, LOW_STOCK, OUT_OF_STOCK] } }
+        - { name: sort, in: query, schema: { type: string, example: 'updatedAt,desc' } }
+        - { name: page, in: query, schema: { type: integer, minimum: 0, default: 0 } }
+        - { name: size, in: query, schema: { type: integer, minimum: 1, maximum: 100, default: 20 } }
+      responses:
+        '200':
+          description: 삭제되지 않은 상품과 필터 후 전체 수
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items, total]
+                properties:
+                  items: { type: array, items: { $ref: '#/components/schemas/Product' } }
+                  total: { type: integer, minimum: 0 }
+        '400': { $ref: '#/components/responses/Error' }
+    post:
+      operationId: createProduct
+      summary: 상품 등록 연결점
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ProductInput' }
+      responses:
+        '201': { $ref: '#/components/responses/Product' }
+        '400': { $ref: '#/components/responses/Error' }
+        '409': { $ref: '#/components/responses/Error' }
+  /products/{id}:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+    get:
+      operationId: getProduct
+      responses:
+        '200': { $ref: '#/components/responses/Product' }
+        '404': { $ref: '#/components/responses/Error' }
+    patch:
+      operationId: updateProduct
+      description: 기존 version 필수; 오래된 저장은 409에 대응한다.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - { $ref: '#/components/schemas/ProductInput' }
+                - type: object
+                  required: [version]
+                  properties:
+                    version: { type: integer, minimum: 1 }
+      responses:
+        '200': { $ref: '#/components/responses/Product' }
+        '400': { $ref: '#/components/responses/Error' }
+        '404': { $ref: '#/components/responses/Error' }
+        '409': { $ref: '#/components/responses/Error' }
+    delete:
+      operationId: archiveProduct
+      description: 물리 삭제가 아닌 보관; 기존 이미지와 변경 이력은 유지한다.
+      parameters:
+        - { name: version, in: query, required: true, schema: { type: integer, minimum: 1 } }
+      responses:
+        '204': { description: 보관 완료 }
+        '404': { $ref: '#/components/responses/Error' }
+        '409': { $ref: '#/components/responses/Error' }
+  /products/bulk:
+    post:
+      operationId: bulkUpdateProducts
+      description: UI에서 전후값 미리보기·확정 후 호출할 미래 연결점. 각 행 version 확인, 부분 실패 명시.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [items, changes]
+              properties:
+                items:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: object
+                    required: [id, version]
+                    properties:
+                      id: { type: string }
+                      version: { type: integer, minimum: 1 }
+                changes:
+                  type: object
+                  minProperties: 1
+                  properties:
+                    saleStatus: { type: string, enum: [ON_SALE, STOPPED] }
+                    visible: { type: boolean }
+                    stockStatus: { type: string, enum: [IN_STOCK, LOW_STOCK, OUT_OF_STOCK] }
+      responses:
+        '200':
+          description: 행별 적용 결과; 전체 원자성으로 표현하지 않음
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  succeeded: { type: array, items: { type: string } }
+                  failed:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: string }
+                        code: { type: string, enum: [CONFLICT, NOT_FOUND, VALIDATION] }
+        '400': { $ref: '#/components/responses/Error' }
+  /messages:
+    get:
+      operationId: listMessages
+      responses:
+        '200':
+          description: 합성 캠페인 목록
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Message' } }
+    post:
+      operationId: requestDemoMessage
+      description: 현재는 로컬 FAKE만. 실제 수신번호와 외부 provider 호출 없음. 처리 중 중복 요청 방지.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [martId, title, body, type, audienceId]
+              properties:
+                martId: { type: string }
+                title: { type: string, minLength: 1 }
+                body: { type: string, minLength: 1 }
+                type: { type: string, enum: [SMS, LMS] }
+                audienceId: { type: string, description: 앱에 사전 정의된 합성 수신자 그룹만 }
+                scheduledAt: { type: string, format: date-time, nullable: true }
+      responses:
+        '202':
+          description: 요청 접수이며 실제 전달 성공이 아님
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Message' }
+        '400': { $ref: '#/components/responses/Error' }
+  /images:
+    get:
+      operationId: listImages
+      responses:
+        '200':
+          description: 이미지 metadata 목록; URL 해석은 서비스 책임
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Image' } }
+  /members:
+    get:
+      operationId: listMembers
+      parameters:
+        - { name: q, in: query, schema: { type: string } }
+        - { name: status, in: query, schema: { type: string } }
+        - { name: martId, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: 검색·상태 필터 대상인 마스킹된 합성 회원 목록과 상세 연결점
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id: { type: string }
+                    name: { type: string }
+                    martId: { type: string }
+                    status: { type: string }
+                    maskedContact: { type: string }
+  /settings:
+    get:
+      operationId: getSettings
+      responses:
+        '200':
+          description: 마트 기본정보·합성 관리자 목록·운영 설정. 실제 인증과 무관.
+    patch:
+      operationId: updateSettings
+      requestBody:
+        content:
+          application/json:
+            schema: { type: object, additionalProperties: true }
+      responses:
+        '200': { description: 데모 설정 저장 }
+        '400': { $ref: '#/components/responses/Error' }
+components:
+  responses:
+    Error:
+      description: 서비스 오류. 미래 서버는 별도 인증/인가 계약에서 401/403을 정의해야 함.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    Product:
+      description: 상품
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Product' }
+  schemas:
+    ProductInput:
+      type: object
+      required: [code, barcode, name, martId, category, brand, specification, price, discountPrice, minOrder, maxOrder, saleStatus, visible, stockStatus]
+      properties:
+        code: { type: string, minLength: 1 }
+        barcode: { type: string, minLength: 1, example: '0012345678901' }
+        name: { type: string, minLength: 1 }
+        martId: { type: string, minLength: 1 }
+        category: { type: string, minLength: 1 }
+        brand: { type: string, minLength: 1 }
+        specification: { type: string, minLength: 1 }
+        price: { type: integer, minimum: 0, maximum: 9007199254740991 }
+        discountPrice: { type: integer, minimum: 0, maximum: 9007199254740991, nullable: true, description: 판매가 이하 }
+        minOrder: { type: integer, minimum: 1 }
+        maxOrder: { type: integer, minimum: 1, description: minOrder 이상 }
+        saleStatus: { type: string, enum: [ON_SALE, STOPPED] }
+        visible: { type: boolean }
+        stockStatus: { type: string, enum: [IN_STOCK, LOW_STOCK, OUT_OF_STOCK] }
+        imageUrl: { type: string }
+    Product:
+      allOf:
+        - { $ref: '#/components/schemas/ProductInput' }
+        - type: object
+          required: [id, version, updatedAt]
+          properties:
+            id: { type: string }
+            version: { type: integer, minimum: 1 }
+            imageId: { type: string }
+            updatedAt: { type: string, format: date-time }
+            deletedAt: { type: string, format: date-time, nullable: true }
+    Message:
+      type: object
+      properties:
+        id: { type: string }
+        martId: { type: string }
+        title: { type: string }
+        type: { type: string, enum: [SMS, LMS] }
+        audienceId: { type: string }
+        total: { type: integer, minimum: 0 }
+        succeeded: { type: integer, minimum: 0 }
+        failed: { type: integer, minimum: 0 }
+        unknown: { type: integer, minimum: 0 }
+        pending: { type: integer, minimum: 0 }
+        status: { type: string, enum: [PENDING, PROCESSING, ACCEPTED, DELIVERED, FAILED, UNKNOWN] }
+        scheduledAt: { type: string, format: date-time, nullable: true }
+    Image:
+      type: object
+      properties:
+        id: { type: string }
+        productId: { type: string }
+        martId: { type: string }
+        name: { type: string }
+        mimeType: { type: string, enum: [image/jpeg, image/png, image/webp] }
+        bytes: { type: integer, minimum: 1, maximum: 5242880 }
+        url: { type: string }
+        status: { type: string, enum: [PROCESSING, READY, FAILED] }
+        createdAt: { type: string, format: date-time }
+    Error:
+      type: object
+      required: [code, message]
+      properties:
+        code: { type: string, enum: [VALIDATION, NOT_FOUND, CONFLICT, STORAGE_UNAVAILABLE, STORAGE_CORRUPT] }
+        message: { type: string }

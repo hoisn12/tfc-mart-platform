@@ -1,0 +1,11 @@
+# Codex CLI 0.166.0 기준. 모델/추론 수준은 메인 세션을 상속한다.
+approval_policy = "never"
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+network_access = false
+
+[agents]
+enabled = true
+# 메인을 제외한 하위 스레드 수. 역할 5개를 순차/교대로 사용한다.
+max_concurrent_threads_per_session = 3

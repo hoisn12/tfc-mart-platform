@@ -1,0 +1,79 @@
+[
+  {
+    "name": "staged-validation",
+    "command": [
+      "python3",
+      "harness/scripts/validate.py"
+    ],
+    "exit": 0,
+    "expected_exit": 0,
+    "status": "PASS",
+    "log": "harness/reports/setup/staged-validation.log",
+    "sha256": "ffc01c87f1f32015d8ac7d7ae07ce99d4a79ef64a9860f1a214e9a2885b50c84"
+  },
+  {
+    "name": "active-validation",
+    "command": [
+      "python3",
+      "harness/scripts/validate.py",
+      "--active"
+    ],
+    "exit": 1,
+    "expected_exit": 1,
+    "status": "PASS",
+    "log": "harness/reports/setup/active-validation.log",
+    "sha256": "21f33b5d4418d15a15570d7c480f2721baae3cc271db80abd0a26c62c0dc146a"
+  },
+  {
+    "name": "phase-0-block",
+    "command": [
+      "python3",
+      "harness/scripts/check_gate.py",
+      "--phase",
+      "0"
+    ],
+    "exit": 1,
+    "expected_exit": 1,
+    "status": "PASS",
+    "log": "harness/reports/setup/phase-0-block.log",
+    "sha256": "d283c180a738892f0acad5da7d182f9ce78144cd187ec23c0675f7bc26e9c8dd"
+  },
+  {
+    "name": "gate-tests",
+    "command": [
+      "python3",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "harness/tests",
+      "-v"
+    ],
+    "exit": 0,
+    "expected_exit": 0,
+    "status": "PASS",
+    "log": "harness/reports/setup/gate-tests.log",
+    "sha256": "5551c8bbb4f8f259367e237a3d09b0f40087aa560109b4f975227891dccbf4e7"
+  },
+  {
+    "name": "native-unknown-key-rejected",
+    "exit": 1,
+    "status": "PASS",
+    "log": "harness/reports/setup/native-unknown-key.log",
+    "sha256": "8337c4eb56493dfa9d94d66eee143dd5098a6bb69b318b4dc54ffaaf689f8614"
+  },
+  {
+    "name": "source-preservation-and-scope",
+    "status": "PASS",
+    "unchanged_original_files": 12,
+    "expected_changes": [
+      "docs/README.md link",
+      "docs/progress.md renamed+appended as docs/PROGRESS.md"
+    ],
+    "python_ast": "PASS",
+    "markdown_files_checked": 12,
+    "business_implementation": "NOT_STARTED",
+    "custom_agent_runtime": "NOT_RUN"
+  }
+]

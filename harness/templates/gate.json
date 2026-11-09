@@ -1,0 +1,63 @@
+{
+  "phase": 0,
+  "attempt": 1,
+  "status": "BLOCKED",
+  "reviewer": "reviewer",
+  "reviewer_task_id": "REPLACE_WITH_INDEPENDENT_FINAL_TASK",
+  "reviewer_independent": false,
+  "reviewer_verdict": "BLOCKED",
+  "snapshot": {},
+  "archive": {},
+  "contract": {
+    "status": "DRAFT",
+    "approved_by": "",
+    "reviewer_verdict": "BLOCKED",
+    "reviewer_independent": false,
+    "reviewer_task_id": "REPLACE_WITH_INDEPENDENT_CONTRACT_TASK",
+    "files": {},
+    "approval": {
+      "path": "harness/reports/phase-0/attempt-1/contract-approval.md",
+      "sha256": "REPLACE_WITH_ACTUAL_SHA256"
+    }
+  },
+  "evidence": {
+    "requirements": {
+      "status": "NOT_RUN",
+      "path": "harness/reports/phase-0/attempt-1/requirements.md",
+      "sha256": "REPLACE_WITH_ACTUAL_SHA256"
+    },
+    "contract": {
+      "status": "NOT_RUN",
+      "path": "harness/reports/phase-0/attempt-1/contract.md",
+      "sha256": "REPLACE_WITH_ACTUAL_SHA256"
+    },
+    "tests": {
+      "status": "NOT_RUN",
+      "path": "harness/reports/phase-0/attempt-1/tests.md",
+      "sha256": "REPLACE_WITH_ACTUAL_SHA256"
+    },
+    "recovery": {
+      "status": "NOT_RUN",
+      "path": "harness/reports/phase-0/attempt-1/recovery.md",
+      "sha256": "REPLACE_WITH_ACTUAL_SHA256"
+    },
+    "rollback": {
+      "status": "NOT_RUN",
+      "path": "harness/reports/phase-0/attempt-1/rollback.md",
+      "sha256": "REPLACE_WITH_ACTUAL_SHA256"
+    },
+    "operations": {
+      "status": "NOT_RUN",
+      "path": "harness/reports/phase-0/attempt-1/operations.md",
+      "sha256": "REPLACE_WITH_ACTUAL_SHA256"
+    },
+    "independent_review": {
+      "status": "NOT_RUN",
+      "path": "harness/reports/phase-0/attempt-1/independent_review.md",
+      "sha256": "REPLACE_WITH_ACTUAL_SHA256"
+    }
+  },
+  "unresolved": [
+    "필수 증거와 독립 판정 미제출"
+  ]
+}

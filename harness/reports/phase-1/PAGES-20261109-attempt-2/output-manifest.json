@@ -1,0 +1,7 @@
+{
+  ".github/workflows/pages.yml": "01e2234b095166876f6bde6cbf4ea5451080b96a63239a4dd3d92219b33a8045",
+  "frontend/src/main.tsx": "3bfed077d6515441f960602651570f4f3bffb82dfd03c22f7b294b3ba9a758e8",
+  "README.md": "f3e8f50c8b9fbeb8f54f95c1d604095f59690be6899f9bb4fe98e56dc1d686db",
+  "docs/adr/010-github-pages-demo.md": "58130c059e332a8930feb1fe061f93cbab87b75fb352d28344391c8c3ab457b2",
+  "harness/reports/phase-1/PAGES-20261109-main.md": "ac42b1a445d3d94cf40577659a7525a83c7c4a874f94a9f4ff551515aab23869"
+}

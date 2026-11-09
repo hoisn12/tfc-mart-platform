@@ -1,0 +1,10 @@
+{
+  "frontend/src/main.tsx": "74a34efbb6f14df04fee639339a99a5aca6573a75460cc424d00c634e21c9b19",
+  "README.md": "61944d1fc9d6fc1196e9a9d7f64fa1be89eaad5a00758de9c6cb38277d199e01",
+  "frontend/package.json": "adf0bf792ee09a4bcc464fe64b6f75d0b36b85002e6d6e716acb4c1839477d9e",
+  "frontend/package-lock.json": "9e0775c25187a8e197fc0e5e44050364318351842bcb85fabbce6c88d4b96c48",
+  "frontend/vite.config.ts": "befaab00aa0ce0e4f8e9e3c085f48a968b4e71d581650443a0af1a1748263039",
+  "docs/contracts/ui-prototype.behavior.md": "914bb8043bf2d7641316419c469e27c5b7cfd3f1a3bfdf3f9aef9aa02d5cc9b7",
+  "docs/contracts/ui-prototype.openapi.yaml": "fcb89bbb0e5c96964e7868ed7021b0f98cf5a40819c8dc280f91d70e005c872c",
+  "docs/adr/009-ui-prototype.md": "504beb38465b55401a5fb4b77de5287f3bbf2e1aff7c46393799dba8c903635a"
+}

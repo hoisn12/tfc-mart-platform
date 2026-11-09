@@ -1,0 +1,10 @@
+{
+  "frontend/src/styles.css": "48f9a3ebadf48e140c92f00d4f250bc45e57684b6366eb0128887bc863302c33",
+  "frontend/src/features/dashboard/DashboardPage.tsx": "eb108a6e76247857c0963178d7a9623a5ba7677cbf3ee67c766a0e89e68ef7bb",
+  "contract_files": {
+    "docs/contracts/ui-prototype.behavior.md": "914bb8043bf2d7641316419c469e27c5b7cfd3f1a3bfdf3f9aef9aa02d5cc9b7",
+    "docs/contracts/ui-prototype.openapi.yaml": "fcb89bbb0e5c96964e7868ed7021b0f98cf5a40819c8dc280f91d70e005c872c",
+    "docs/adr/009-ui-prototype.md": "504beb38465b55401a5fb4b77de5287f3bbf2e1aff7c46393799dba8c903635a"
+  },
+  "frontend/index.html": "aa4c12800a0a3489527cc1e82a5480ae2529cd5165f7c7b00db320a5b10a0120"
+}

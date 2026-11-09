@@ -1,0 +1,26 @@
+$ python3 -B -m unittest discover -s harness/tests -v
+test_changed_archive_blocks (test_gate.GateTests.test_changed_archive_blocks) ... ok
+test_changed_evidence_blocks (test_gate.GateTests.test_changed_evidence_blocks) ... ok
+test_changed_output_blocks (test_gate.GateTests.test_changed_output_blocks) ... ok
+test_complete_fixture_passes (test_gate.GateTests.test_complete_fixture_passes) ... ok
+test_failed_predecessor_blocks_next_phase (test_gate.GateTests.test_failed_predecessor_blocks_next_phase) ... ok
+test_implementation_phase_needs_real_outputs (test_gate.GateTests.test_implementation_phase_needs_real_outputs) ... ok
+test_inactive_harness_blocks (test_gate.GateTests.test_inactive_harness_blocks) ... ok
+test_later_phase_contract_still_required (test_gate.GateTests.test_later_phase_contract_still_required) ... ok
+test_later_phase_may_evolve_documents_with_old_archive_intact (test_gate.GateTests.test_later_phase_may_evolve_documents_with_old_archive_intact) ... ok
+test_missing_active_config_blocks (test_gate.GateTests.test_missing_active_config_blocks) ... ok
+test_missing_category_blocks (test_gate.GateTests.test_missing_category_blocks) ... ok
+test_missing_contract_blocks (test_gate.GateTests.test_missing_contract_blocks) ... ok
+test_non_independent_reviewer_blocks (test_gate.GateTests.test_non_independent_reviewer_blocks) ... ok
+test_not_run_evidence_blocks (test_gate.GateTests.test_not_run_evidence_blocks) ... ok
+test_outside_path_blocks (test_gate.GateTests.test_outside_path_blocks) ... ok
+test_self_review_report_reuse_blocks (test_gate.GateTests.test_self_review_report_reuse_blocks) ... ok
+test_unfrozen_contract_blocks (test_gate.GateTests.test_unfrozen_contract_blocks) ... ok
+test_unresolved_blocks (test_gate.GateTests.test_unresolved_blocks) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.246s
+
+OK
+
+exit=0

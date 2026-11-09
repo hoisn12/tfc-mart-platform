@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "setup": {
+    "status": "PASS",
+    "config_location": ".codex",
+    "activation": "ACTIVE",
+    "runtime_smoke": "PASS",
+    "runtime_evidence": {
+      "path": "harness/reports/setup/runtime-smoke.md",
+      "sha256": "1bff629b17d436561bcbcf81cda92ff48b9a1446df7bdf3160d8d4093d1f2f59"
+    }
+  },
+  "phases": [
+    {
+      "phase": 0,
+      "status": "BLOCKED",
+      "reason": "기존 설계 초안 존재. Discovery 승인·계약 동결·독립 gate 미완료.",
+      "gate": "harness/reports/phase-0/gate.json"
+    },
+    {
+      "phase": 1,
+      "status": "NOT_STARTED",
+      "reason": "이전 Phase gate와 별도 실행 범위 필요",
+      "gate": "harness/reports/phase-1/gate.json"
+    },
+    {
+      "phase": 2,
+      "status": "NOT_STARTED",
+      "reason": "이전 Phase gate와 별도 실행 범위 필요",
+      "gate": "harness/reports/phase-2/gate.json"
+    },
+    {
+      "phase": 3,
+      "status": "NOT_STARTED",
+      "reason": "이전 Phase gate와 별도 실행 범위 필요",
+      "gate": "harness/reports/phase-3/gate.json"
+    },
+    {
+      "phase": 4,
+      "status": "NOT_STARTED",
+      "reason": "이전 Phase gate와 별도 실행 범위 필요",
+      "gate": "harness/reports/phase-4/gate.json"
+    },
+    {
+      "phase": 5,
+      "status": "NOT_STARTED",
+      "reason": "이전 Phase gate와 별도 실행 범위 필요",
+      "gate": "harness/reports/phase-5/gate.json"
+    },
+    {
+      "phase": 6,
+      "status": "NOT_STARTED",
+      "reason": "이전 Phase gate와 별도 실행 범위 필요",
+      "gate": "harness/reports/phase-6/gate.json"
+    }
+  ],
+  "ui_prototype": {
+    "status": "IN_PROGRESS",
+    "scope": "frontend-only local mock; latest user instruction 2026-11-05",
+    "native_custom_agents": "NOT_ACTIVE",
+    "agent_execution": "collaboration roles using harness/codex/agents instructions",
+    "contract": "FROZEN",
+    "report": "harness/reports/phase-1/ui-result.json",
+    "contract_manifest": "harness/reports/phase-1/contract-freeze.json"
+  }
+}

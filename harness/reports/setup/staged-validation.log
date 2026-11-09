@@ -1,0 +1,14 @@
+$ python3 harness/scripts/validate.py
+{
+  "status": "PASS",
+  "scope": "staged-files",
+  "toml": 6,
+  "standalone_minimal_schema": "PASS",
+  "native_main_config_strict": "PASS",
+  "codex_version": "0.166.0",
+  "active_config": "NOT_CHECKED",
+  "custom_agent_spawn": "NOT_RUN",
+  "note": "파일 검증은 프로젝트 신뢰/역할 로딩/실제 spawn 성공을 증명하지 않음"
+}
+
+exit=0

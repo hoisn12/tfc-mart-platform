@@ -1,0 +1,41 @@
+{
+  "status": "FROZEN",
+  "approved_by": "main-codex",
+  "reviewer_task": "/root/reviewer_contract",
+  "reviewer_verdict": "PASS",
+  "files": {
+    "docs/contracts/ui-prototype.behavior.md": "914bb8043bf2d7641316419c469e27c5b7cfd3f1a3bfdf3f9aef9aa02d5cc9b7",
+    "docs/contracts/ui-prototype.openapi.yaml": "fcb89bbb0e5c96964e7868ed7021b0f98cf5a40819c8dc280f91d70e005c872c",
+    "docs/adr/009-ui-prototype.md": "504beb38465b55401a5fb4b77de5287f3bbf2e1aff7c46393799dba8c903635a"
+  },
+  "implementation_files": [
+    "frontend/src/main.tsx",
+    "frontend/src/app/App.tsx",
+    "frontend/src/app/AppShell.tsx",
+    "frontend/src/app/PrototypeProvider.tsx",
+    "frontend/src/styles.css",
+    "frontend/src/types/index.ts",
+    "frontend/src/lib/utils.ts",
+    "frontend/src/lib/format.ts",
+    "frontend/src/services/repository.ts",
+    "frontend/src/services/localRepository.ts",
+    "frontend/src/mocks/seed.ts",
+    "frontend/src/hooks/useRepository.ts",
+    "frontend/src/components/ui/button.tsx",
+    "frontend/src/components/ui/dialog.tsx",
+    "frontend/src/components/ui/input.tsx",
+    "frontend/src/components/ui/badge.tsx",
+    "frontend/src/components/ui/table.tsx",
+    "frontend/src/components/shared.tsx",
+    "frontend/src/components/ProductImage.tsx",
+    "frontend/src/features/dashboard/DashboardPage.tsx",
+    "frontend/src/features/products/ProductsPage.tsx",
+    "frontend/src/features/products/ProductForm.tsx",
+    "frontend/src/features/messaging/MessagingPage.tsx",
+    "frontend/src/features/images/ImagesPage.tsx",
+    "frontend/src/features/members/MembersPage.tsx",
+    "frontend/src/features/settings/SettingsPage.tsx",
+    "frontend/src/services/localRepository.test.ts",
+    "frontend/tests/prototype.spec.ts"
+  ]
+}
